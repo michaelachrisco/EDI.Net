@@ -9,8 +9,7 @@ namespace indice.Edi.Tests.Models
     /// <summary>
     /// Benefit Enrollment and Maintenance 834
     /// </summary>
-    public class BenefitEnrollmentAndMaintenance_834
-    {
+    public class BenefitEnrollmentAndMaintenance_834 {
         #region ISA and IEA
         [EdiValue("9(2)", Path = "ISA/0", Description = "ISA01 - Authorization Information Qualifier")]
         public int AuthorizationInformationQualifier { get; set; }
@@ -71,6 +70,37 @@ namespace indice.Edi.Tests.Models
         [EdiGroup]
         public class FunctionalGroup
         {
+
+            [EdiValue("X(2)", Path = "GS/0", Description = "GS01 - Functional Identifier Code")]
+            public string FunctionalIdentifierCode { get; set; }
+
+            [EdiValue("X(15)", Path = "GS/1", Description = "GS02 - Application Sender's Code")]
+            public string ApplicationSenderCode { get; set; }
+
+            [EdiValue("X(15)", Path = "GS/2", Description = "GS03 - Application Receiver's Code")]
+            public string ApplicationReceiverCode { get; set; }
+
+            [EdiValue("9(8)", Path = "GS/3", Format = "yyyyMMdd", Description = "GS04 - Date")]
+            [EdiValue("9(4)", Path = "GS/4", Format = "HHmm", Description = "GS05 - Time")]
+            public DateTime Date { get; set; }
+
+            [EdiValue("9(9)", Path = "GS/5", Format = "HHmm", Description = "GS06 - Group Control Number")]
+            public int GroupControlNumber { get; set; }
+
+            [EdiValue("X(2)", Path = "GS/6", Format = "HHmm", Description = "GS07 Responsible Agency Code")]
+            public string AgencyCode { get; set; }
+
+            [EdiValue("X(2)", Path = "GS/7", Format = "HHmm", Description = "GS08 Version / Release / Industry Identifier Code")]
+            public string Version { get; set; }
+
+            //public List<Benefit> Benefits { get; set; }
+
+
+            [EdiValue("9(1)", Path = "GE/0", Description = "97 Number of Transaction Sets Included")]
+            public int TransactionsCount { get; set; }
+
+            [EdiValue("9(9)", Path = "GE/1", Description = "28 Group Control Number")]
+            public int GroupTrailerControlNumber { get; set; }
         }
     }
 }

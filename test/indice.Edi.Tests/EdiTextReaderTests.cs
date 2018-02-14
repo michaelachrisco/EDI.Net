@@ -25,7 +25,7 @@ namespace indice.Edi.Tests
             }
             Assert.Equal(4, msgCount);
         }
-        
+
         [Fact]
         [Trait(Traits.Tag, "TRADACOMS")]
         public void DeserializeTest() {
@@ -117,7 +117,7 @@ namespace indice.Edi.Tests
 
             Assert.Equal("SE1", quote.LocationId);
             Assert.Equal("SM", quote.LocationResponsibleAgency);
-            
+
             var linArray = quote.Lines;
             Assert.Equal(new DateTime(2010, 10, 19, 23, 00, 00), linArray[0].Period.Date.From);
             Assert.Equal(new DateTime(2010, 10, 20, 00, 00, 00), linArray[1].Period.Date.From);
@@ -244,7 +244,7 @@ namespace indice.Edi.Tests
             Assert.Equal("SPOTMARKED", unbSegment.RoutingAddress);
             Assert.Equal(new DateTime(2012, 10, 10, 11, 4, 0), unbSegment.DateOfPreparation);
             Assert.Equal("HBQ001", unbSegment.ControlRef);
-            
+
             AssertQuote2Message(interchange.Message);
 
             var unz = interchange.Footer;
@@ -387,6 +387,17 @@ namespace indice.Edi.Tests
 
         [Fact]
         [Trait(Traits.Tag, "X12")]
+        public void X12_834_Test() {
+            var grammar = EdiGrammar.NewX12();
+            var interchange = default(Models.BenefitEnrollmentAndMaintenance_834);
+            using (var stream = Helpers.GetResourceStream("x12.834.edi")) {
+                interchange = new EdiSerializer().Deserialize<Models.BenefitEnrollmentAndMaintenance_834>(new StreamReader(stream), grammar);//Need to get INS segments working in order for this to compleate
+            }
+            Assert.Equal(new DateTime(2009, 8, 27, 9, 36, 00), interchange.Date);
+        }
+
+        [Fact]
+        [Trait(Traits.Tag, "X12")]
         public void X12_214_Test() {
             var grammar = EdiGrammar.NewX12();
             var interchange = default(Models.Transportation_214);
@@ -397,7 +408,7 @@ namespace indice.Edi.Tests
             Assert.Equal(3, message.Places.Count);
             Assert.Equal(1751807, message.ReferenceIdentification);
         }
-        
+
         [Fact]
         [Trait(Traits.Tag, "X12")]
         public void X12_214_Trailers_Test() {
@@ -419,21 +430,21 @@ namespace indice.Edi.Tests
         public void X12_204_Test() {
             var grammar = EdiGrammar.NewX12();
             grammar.SetAdvice(
-                segmentNameDelimiter: '*', 
-                dataElementSeparator: '*', 
-                componentDataElementSeparator: ':', 
-                segmentTerminator: '~', 
-                releaseCharacter: null, 
-                reserved: null, 
+                segmentNameDelimiter: '*',
+                dataElementSeparator: '*',
+                componentDataElementSeparator: ':',
+                segmentTerminator: '~',
+                releaseCharacter: null,
+                reserved: null,
                 decimalMark: '.');
 
             string text = string.Empty;
             using (var filestream = Helpers.GetResourceStream("204-MGCTLYST-SAMPLE.EDI"))
             using (var reader = new StreamReader(filestream))
                 text = reader.ReadToEnd();
-            
+
             var stream = new MemoryStream(Encoding.UTF8.GetBytes(text.Replace('\n', '~')));
-            
+
             var segmentCount = 0;
             using (var ediReader = new EdiTextReader(new StreamReader(stream), grammar)) {
                 while (ediReader.Read()) {
@@ -483,7 +494,7 @@ namespace indice.Edi.Tests
             Assert.Equal(interchange.Header_Field4a, "20170119");
             Assert.Equal(interchange.Header_Field4b, "1010");
             Assert.Equal(interchange.Header_Field5, "20170119101016");
-            
+
 
             //Message header info
             Assert.NotNull(interchange.Message);
@@ -552,7 +563,7 @@ namespace indice.Edi.Tests
             Assert.Equal(interchange.Message.TDT_Group1[0].DTM[1].Field1a, "137");
             Assert.Equal(interchange.Message.TDT_Group1[0].DTM[1].Field1b, "20170110");
             Assert.Equal(interchange.Message.TDT_Group1[0].DTM[1].Field1c, "102");
-            
+
 
             //Group 4 - CNI
             Assert.NotNull(interchange.Message.CNI_Group4);
@@ -575,7 +586,7 @@ namespace indice.Edi.Tests
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].LOC[1].Field2b, "139");
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].LOC[1].Field2c, null);
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].LOC[1].Field2d, null);
-            
+
 
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].NAD[0].Field1, "CZ");
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].NAD[0].Field2a, null);
@@ -599,27 +610,27 @@ namespace indice.Edi.Tests
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].Field1, "1");
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].Field2a, "560");
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].Field2b, "BG");
-            
+
 
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[1].Field1, "2");
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[1].Field2a, "880");
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[1].Field2b, "BG");
-            
+
 
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].Field1, "1");
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].Field2a, "560");
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].Field2b, "BG");
-                                                        
+
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].FTX.Field1, "AAA");
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].FTX.Field4a, "36 METRIC TONNES MILK SKIMMED POWDER LH HALAL 25KGS NO OF BAGS:1440 X");
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].FTX.Field4b, " 25KGS NETT WEIGHT :36000.00KGS GROSS WEIGHT:36468.00KGS TOTAL VGM W");
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].FTX.Field4c, "EIGHT: 42488.00KGS GROSS CARGO WEIGHT IS EQUAL TO GROSS WEIGHT FREIGH");
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].FTX.Field4d, "T COLLECT 28 DAYS FREE DEMURRAGE");
-                                                        
+
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].MEA[0].Field1, "AAE");
-                                                        
+
             Assert.Equal(interchange.Message.CNI_Group4[0].RFF_Group5[0].GID_Group10[0].SPG.Field1, "FCIU5956299");
-            
+
 
 
             //CNI Segment 2
@@ -666,13 +677,13 @@ namespace indice.Edi.Tests
             Assert.Equal(interchange.Message.CNI_Group4[1].RFF_Group5[0].NAD[0].Field2b, null);
             Assert.Equal(interchange.Message.CNI_Group4[1].RFF_Group5[0].NAD[0].Field2c, null);
             Assert.Equal(interchange.Message.CNI_Group4[1].RFF_Group5[0].NAD[0].Field3, "BPI A/S");
-                                                        
+
             Assert.Equal(interchange.Message.CNI_Group4[1].RFF_Group5[0].NAD[1].Field1, "CN");
             Assert.Equal(interchange.Message.CNI_Group4[1].RFF_Group5[0].NAD[1].Field2a, null);
             Assert.Equal(interchange.Message.CNI_Group4[1].RFF_Group5[0].NAD[1].Field2b, null);
             Assert.Equal(interchange.Message.CNI_Group4[1].RFF_Group5[0].NAD[1].Field2c, null);
             Assert.Equal(interchange.Message.CNI_Group4[1].RFF_Group5[0].NAD[1].Field3, "TO ORDER");
-                                                        
+
             Assert.Equal(interchange.Message.CNI_Group4[1].RFF_Group5[0].NAD[2].Field1, "N1");
             Assert.Equal(interchange.Message.CNI_Group4[1].RFF_Group5[0].NAD[2].Field2a, null);
             Assert.Equal(interchange.Message.CNI_Group4[1].RFF_Group5[0].NAD[2].Field2b, null);

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Samples\**\*.edi" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    <None Remove="Samples\x12.834.edi" />
     <None Update="xunit.runner.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

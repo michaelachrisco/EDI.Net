@@ -394,6 +394,9 @@ namespace indice.Edi.Tests
                 interchange = new EdiSerializer().Deserialize<Models.BenefitEnrollmentAndMaintenance_834>(new StreamReader(stream), grammar);//Need to get INS segments working in order for this to compleate
             }
             Assert.Equal(new DateTime(2009, 8, 27, 9, 36, 00), interchange.Date);
+            Assert.Equal("0001", interchange.Groups[0].Heading.TrailerTransactionSetControlNumber);
+            Assert.Equal("834", interchange.Groups[0].Heading.TransactionSetCode);
+            Assert.Equal(00, interchange.Groups[0].Heading.TransactionSetPurposeCode);
         }
 
         [Fact]

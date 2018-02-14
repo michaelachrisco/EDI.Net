@@ -93,7 +93,8 @@ namespace indice.Edi.Tests.Models
             [EdiValue("X(2)", Path = "GS/7", Format = "HHmm", Description = "GS08 Version / Release / Industry Identifier Code")]
             public string Version { get; set; }
 
-            //public List<Benefit> Benefits { get; set; }
+            public Heading Heading { get; set; }
+            //public List<Detail> Detail { get; set; }
 
 
             [EdiValue("9(1)", Path = "GE/0", Description = "97 Number of Transaction Sets Included")]
@@ -101,6 +102,52 @@ namespace indice.Edi.Tests.Models
 
             [EdiValue("9(9)", Path = "GE/1", Description = "28 Group Control Number")]
             public int GroupTrailerControlNumber { get; set; }
+        }
+
+        [EdiMessage]
+        public class Heading
+        {
+            #region Header Trailer
+
+            [EdiValue("X(3)", Path = "ST/0", Description = "ST01 - Transaction set ID code")]
+            public string TransactionSetCode { get; set; }
+
+            [EdiValue("X(9)", Path = "ST/1", Description = "ST02 - Transaction set control number")]
+            public string TransactionSetControlNumber { get; set; }
+            //Optional
+            [EdiValue("X(35)", Path = "ST/2", Description = "ST02 - Transaction set control number")]
+            public string ImplementationConventionReference { get; set; }
+
+            [EdiValue("9(2)", Path = "BGN/0", Description = "BGN01 - Transaction Set Purpose Code")]
+            public int TransactionSetPurposeCode { get; set; }
+
+            [EdiValue("X(50)", Path = "BGN/1", Description = "BGN02 - Transaction Set Reference Number")]
+            public string TransactionSetReferenceNumber { get; set; }
+
+            [EdiValue("9(8)", Path = "BGN/2", Description = "BGN03 - Date")]
+            public int TransactionSetCreationDate { get; set; }
+
+            [EdiValue("9(8)", Path = "BGN/3", Description = "BGN04 - Time")]
+            public int TransactionSetCreationTime { get; set; }
+
+            [EdiValue("X(2)", Path = "BGN/4", Description = "BGN05 - Time Code")]
+            public string TimeCode { get; set; }
+
+            [EdiValue("X(50)", Path = "BGN/5", Description = "BGN06 - Reference Identification")]
+            public string ReferenceIdentification { get; set; }
+
+            [EdiValue("X(2)", Path = "BGN/6", Description = "BGN07 - Transaction Type Code")]
+            public string TransactionTypeCode { get; set; }
+
+            [EdiValue("X(2)", Path = "BGN/7", Description = "BGN08 - Action Code")]
+            public string ActionCode { get; set; }
+
+            [EdiValue(Path = "SE/0", Description = "SE01 - Number of included segments")]
+            public int SegmentsCouts { get; set; }
+
+            [EdiValue("X(9)", Path = "SE/1", Description = "SE02 - Transaction set control number (same as ST02)")]
+            public string TrailerTransactionSetControlNumber { get; set; }
+            #endregion
         }
     }
 }

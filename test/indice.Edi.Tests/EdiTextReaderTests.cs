@@ -426,7 +426,15 @@ namespace indice.Edi.Tests
 
             Assert.Equal("Y", interchange.Groups[0].Heading.MemberDetails[0].ResponseCode);
             Assert.Equal("18", interchange.Groups[0].Heading.MemberDetails[0].IndividualRelationshipCode);
-            Assert.Equal("18", interchange.Groups[0].Heading.MemberDetails[0].MaintenanceTypeCode);
+            Assert.Equal("001", interchange.Groups[0].Heading.MemberDetails[0].MaintenanceTypeCode);
+            Assert.Null(interchange.Groups[0].Heading.MemberDetails[0].MaintenanceReasonCode);
+            Assert.Equal("A",  interchange.Groups[0].Heading.MemberDetails[0].BenefitStatusCode);
+            Assert.Equal("E", interchange.Groups[0].Heading.MemberDetails[0].MedicareStatusCode);
+            Assert.Null(interchange.Groups[0].Heading.MemberDetails[0].COBRAQualifyingEventCode);
+            Assert.Equal("FT",interchange.Groups[0].Heading.MemberDetails[0].EmploymentStatusCode);
+            Assert.Null(interchange.Groups[0].Heading.MemberDetails[0].StudentStatusCode);
+            Assert.Equal("N", interchange.Groups[0].Heading.MemberDetails[0].HandicapIndicator);
+            //TODO: Test optional INS segments
 
 
 

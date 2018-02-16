@@ -200,6 +200,45 @@ namespace indice.Edi.Tests.Models
 
             [EdiValue("X(3)", Path = "INS/3", Description = "INS04 - Maintenance Reason Code")]
             public string MaintenanceReasonCode { get; set; }
+
+            [EdiValue("X(1)", Path = "INS/4", Description = "INS05 - Benefit Status Code")]
+            public string BenefitStatusCode { get; set; }
+
+            [EdiValue("X(1)", Path = "INS/5", Description = "INS06 - Medicare Status Code")]
+            public string MedicareStatusCode { get; set; }
+
+            [EdiValue("X(2)", Path = "INS/6", Description = "INS07 - COBRA Qualifying Event Code")]
+            public string COBRAQualifyingEventCode { get; set; }
+
+            [EdiValue("X(2)", Path = "INS/7", Description = "INS08 - Employment Status Code")]
+            public string EmploymentStatusCode { get; set; }
+
+            [EdiValue("X(1)", Path = "INS/8", Description = "INS09 - Student Status Code")]
+            public string StudentStatusCode { get; set; }
+            //This is supposed to be a handicap indicator but some carriers bootstrap it to convey other Y/N responses.
+            [EdiValue("X(1)", Path = "INS/9", Description = "INS10 - Response Code (Handicap Indicator)")]
+            public string HandicapIndicator { get; set; }
+
+            [EdiValue("X(3)", Path = "INS/10", Description = "INS11 - Date Time Period Format Qualifier")]
+            public string DateTimePeriodFormatQualifier { get; set; }
+
+            [EdiValue("X(35)", Path = "INS/11", Description = "INS12 - Date Time Period")]
+            public string DateTimePeriod { get; set; }
+
+            [EdiValue("X(35)", Path = "INS/12", Description = "INS13 - Confidentiality Code")]
+            public string ConfidentialityCode { get; set; }
+            //These are usually not used but still possible...
+            [EdiValue("X(30)", Path = "INS/13", Description = "INS14 - City Name", Mandatory = false)]
+            public string CityName { get; set; }
+
+            [EdiValue("X(30)", Path = "INS/14", Description = "INS15 - State or Province Code", Mandatory = false)]
+            public string StateProvinceCode { get; set; }
+
+            [EdiValue("X(3)", Path = "INS/15", Description = "INS16 - Country Code", Mandatory = false)]
+            public string CountryCode { get; set; }
+
+            [EdiValue("X(9)", Path = "INS/16", Description = "INS17 - Number", Mandatory = false)]
+            public string Number { get; set; }
         }
     }
 }

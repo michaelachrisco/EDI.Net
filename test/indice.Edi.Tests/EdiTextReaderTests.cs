@@ -411,7 +411,7 @@ namespace indice.Edi.Tests
             Assert.Equal("WAYNE STATE UNIVERSITY", interchange.Groups[0].Heading.Payer.Name);
             Assert.Equal("FI", interchange.Groups[0].Heading.Payer.IdentificationCodeQualifier);
             Assert.Equal("38 6028429", interchange.Groups[0].Heading.Payer.IdentificationCode);
-            //Most files have either a Broker or a Thirdparty but almost never both
+            //Most files have either a Broker or a Third Party but almost never both
             //TODO: Add as part of validation
             /*
             Assert.Equal("BO", interchange.Groups[0].Heading.Broker.EntityIdentifierCode);
@@ -423,6 +423,19 @@ namespace indice.Edi.Tests
             Assert.Equal("WEYCO", interchange.Groups[0].Heading.ThirdPartyAdministrator.Name);
             Assert.Equal("FI", interchange.Groups[0].Heading.ThirdPartyAdministrator.IdentificationCodeQualifier);
             Assert.Equal("382328142", interchange.Groups[0].Heading.ThirdPartyAdministrator.IdentificationCode);
+
+            Assert.Equal("Y", interchange.Groups[0].Heading.MemberDetails[0].ResponseCode);
+            Assert.Equal("18", interchange.Groups[0].Heading.MemberDetails[0].IndividualRelationshipCode);
+            Assert.Equal("18", interchange.Groups[0].Heading.MemberDetails[0].MaintenanceTypeCode);
+
+
+
+            // serialize to file.
+            using (var textWriter = new StreamWriter(File.Open(@"c:\temp\out.edi", FileMode.Create))) {
+                using (var ediWriter = new EdiTextWriter(textWriter, grammar)) {
+                    new EdiSerializer().Serialize(ediWriter, interchange);
+                }
+            }
         }
 
         [Fact]

@@ -94,8 +94,6 @@ namespace indice.Edi.Tests.Models
             public string Version { get; set; }
 
             public Heading Heading { get; set; }
-            //public List<Detail> Detail { get; set; }
-
 
             [EdiValue("9(1)", Path = "GE/0", Description = "97 Number of Transaction Sets Included")]
             public int TransactionsCount { get; set; }
@@ -165,6 +163,8 @@ namespace indice.Edi.Tests.Models
             [EdiCondition("TV", Path = "N1/0/0")]
             public N1 ThirdPartyAdministrator { get; set; }
 
+            public List<MemberDetail> MemberDetails { get; set; }
+
             [EdiValue("X(9)", Path = "SE/1", Description = "SE02 - Transaction set control number (same as ST02)")]
             public string TrailerTransactionSetControlNumber { get; set; }
             #endregion
@@ -184,6 +184,22 @@ namespace indice.Edi.Tests.Models
 
             [EdiValue("X(80)", Path = "N1/3", Description = "N104 - Identification Code")]
             public string IdentificationCode { get; set; }
+        }
+
+        [EdiSegment, EdiPath("INS")]
+        public class MemberDetail
+        {
+            [EdiValue("X(1)", Path = "INS/0", Description = "INS01 - Yes/No Condition or Response Code")]
+            public string ResponseCode { get; set; }
+
+            [EdiValue("X(2)", Path = "INS/1", Description = "INS02 - Individual Relationship Code")]
+            public string IndividualRelationshipCode { get; set; }
+
+            [EdiValue("X(3)", Path = "INS/2", Description = "INS03 - Maintenance Type Code")]
+            public string MaintenanceTypeCode { get; set; }
+
+            [EdiValue("X(3)", Path = "INS/3", Description = "INS04 - Maintenance Reason Code")]
+            public string MaintenanceReasonCode { get; set; }
         }
     }
 }

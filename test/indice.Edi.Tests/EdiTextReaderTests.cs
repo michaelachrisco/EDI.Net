@@ -401,10 +401,28 @@ namespace indice.Edi.Tests
             Assert.Equal("WSU-WEY-20050221-1", interchange.Groups[0].Heading.TransactionSetReferenceNumber);
             Assert.Equal(00, interchange.Groups[0].Heading.TransactionSetPurposeCode);
             Assert.Equal(612, interchange.Groups[0].Heading.SegmentCounts);
+
             Assert.Equal("P5", interchange.Groups[0].Heading.SponsorName.EntityIdentifierCode);
             Assert.Equal("WAYNE STATE UNIVERSITY", interchange.Groups[0].Heading.SponsorName.Name);
             Assert.Equal("FI", interchange.Groups[0].Heading.SponsorName.IdentificationCodeQualifier);
             Assert.Equal("38 6028429", interchange.Groups[0].Heading.SponsorName.IdentificationCode);
+
+            Assert.Equal("IN", interchange.Groups[0].Heading.Payer.EntityIdentifierCode);
+            Assert.Equal("WAYNE STATE UNIVERSITY", interchange.Groups[0].Heading.Payer.Name);
+            Assert.Equal("FI", interchange.Groups[0].Heading.Payer.IdentificationCodeQualifier);
+            Assert.Equal("38 6028429", interchange.Groups[0].Heading.Payer.IdentificationCode);
+            //Most files have either a Broker or a Thirdparty but almost never both
+            //TODO: Add as part of validation
+            /*
+            Assert.Equal("BO", interchange.Groups[0].Heading.Broker.EntityIdentifierCode);
+            Assert.Equal("WAYNE STATE UNIVERSITY", interchange.Groups[0].Heading.Broker.Name);
+            Assert.Equal("FI", interchange.Groups[0].Heading.Broker.IdentificationCodeQualifier);
+            Assert.Equal("38 6028429", interchange.Groups[0].Heading.Broker.IdentificationCode);
+            */
+            Assert.Equal("TV", interchange.Groups[0].Heading.ThirdPartyAdministrator.EntityIdentifierCode);
+            Assert.Equal("WEYCO", interchange.Groups[0].Heading.ThirdPartyAdministrator.Name);
+            Assert.Equal("FI", interchange.Groups[0].Heading.ThirdPartyAdministrator.IdentificationCodeQualifier);
+            Assert.Equal("382328142", interchange.Groups[0].Heading.ThirdPartyAdministrator.IdentificationCode);
         }
 
         [Fact]

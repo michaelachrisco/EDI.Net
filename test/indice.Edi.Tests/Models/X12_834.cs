@@ -150,6 +150,21 @@ namespace indice.Edi.Tests.Models
             [EdiCondition("P5", Path = "N1/0/0")]
             public N1 SponsorName { get; set; }
 
+            //Loop 1000B
+            //Segment N1 Payer
+            [EdiCondition("IN", Path = "N1/0/0")]
+            public N1 Payer { get; set; }
+
+            //Loop 1000C
+            //Segment N1 Broker
+            [EdiCondition("BO", Path = "N1/0/0")]
+            public N1 Broker { get; set; }
+
+            //Loop 1000C
+            //Segment N1 Third Party Administrator
+            [EdiCondition("TV", Path = "N1/0/0")]
+            public N1 ThirdPartyAdministrator { get; set; }
+
             [EdiValue("X(9)", Path = "SE/1", Description = "SE02 - Transaction set control number (same as ST02)")]
             public string TrailerTransactionSetControlNumber { get; set; }
             #endregion

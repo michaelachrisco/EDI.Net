@@ -143,7 +143,7 @@ namespace indice.Edi.Tests.Models
             public string ActionCode { get; set; }
 
             [EdiValue(Path = "SE/0", Description = "SE01 - Number of included segments")]
-            public int SegmentsCouts { get; set; }
+            public int SegmentCounts { get; set; }
 
             [EdiValue("X(9)", Path = "SE/1", Description = "SE02 - Transaction set control number (same as ST02)")]
             public string TrailerTransactionSetControlNumber { get; set; }

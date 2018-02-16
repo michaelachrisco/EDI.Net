@@ -396,7 +396,11 @@ namespace indice.Edi.Tests
             Assert.Equal(new DateTime(2009, 8, 27, 9, 36, 00), interchange.Date);
             Assert.Equal("0001", interchange.Groups[0].Heading.TrailerTransactionSetControlNumber);
             Assert.Equal("834", interchange.Groups[0].Heading.TransactionSetCode);
+            Assert.Equal("0001", interchange.Groups[0].Heading.TransactionSetControlNumber);
+            Assert.Null(interchange.Groups[0].Heading.ImplementationConventionReference);
+            Assert.Equal("WSU-WEY-20050221-1", interchange.Groups[0].Heading.TransactionSetReferenceNumber);
             Assert.Equal(00, interchange.Groups[0].Heading.TransactionSetPurposeCode);
+            Assert.Equal(612, interchange.Groups[0].Heading.SegmentCounts);
         }
 
         [Fact]

@@ -145,9 +145,30 @@ namespace indice.Edi.Tests.Models
             [EdiValue(Path = "SE/0", Description = "SE01 - Number of included segments")]
             public int SegmentCounts { get; set; }
 
+            //Loop 1000A
+            //Segment N1 Sponsor Name
+            [EdiCondition("P5", Path = "N1/0/0")]
+            public N1 SponsorName { get; set; }
+
             [EdiValue("X(9)", Path = "SE/1", Description = "SE02 - Transaction set control number (same as ST02)")]
             public string TrailerTransactionSetControlNumber { get; set; }
             #endregion
+        }
+
+        [EdiSegment, EdiPath("N1")]
+        public class N1
+        {
+            [EdiValue("X(3)", Path = "N1/0", Description = "N101 - Entity Identifier Code")]
+            public string EntityIdentifierCode { get; set; }
+
+            [EdiValue("X(60)", Path = "N1/1", Description = "N102 - Name")]
+            public string Name { get; set; }
+
+            [EdiValue("X(2)", Path = "N1/2", Description = "N103 - Identification Code Qualifier")]
+            public string IdentificationCodeQualifier { get; set; }
+
+            [EdiValue("X(80)", Path = "N1/3", Description = "N104 - Identification Code")]
+            public string IdentificationCode { get; set; }
         }
     }
 }

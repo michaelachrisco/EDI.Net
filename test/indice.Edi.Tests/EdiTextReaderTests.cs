@@ -391,7 +391,7 @@ namespace indice.Edi.Tests
             var grammar = EdiGrammar.NewX12();
             var interchange = default(Models.BenefitEnrollmentAndMaintenance_834);
             using (var stream = Helpers.GetResourceStream("x12.834.edi")) {
-                interchange = new EdiSerializer().Deserialize<Models.BenefitEnrollmentAndMaintenance_834>(new StreamReader(stream), grammar);//Need to get INS segments working in order for this to compleate
+                interchange = new EdiSerializer().Deserialize<Models.BenefitEnrollmentAndMaintenance_834>(new StreamReader(stream), grammar);
             }
             Assert.Equal(new DateTime(2009, 8, 27, 9, 36, 00), interchange.Date);
             Assert.Equal("0001", interchange.Groups[0].Heading.TrailerTransactionSetControlNumber);
@@ -401,6 +401,10 @@ namespace indice.Edi.Tests
             Assert.Equal("WSU-WEY-20050221-1", interchange.Groups[0].Heading.TransactionSetReferenceNumber);
             Assert.Equal(00, interchange.Groups[0].Heading.TransactionSetPurposeCode);
             Assert.Equal(612, interchange.Groups[0].Heading.SegmentCounts);
+            Assert.Equal("P5", interchange.Groups[0].Heading.SponsorName.EntityIdentifierCode);
+            Assert.Equal("WAYNE STATE UNIVERSITY", interchange.Groups[0].Heading.SponsorName.Name);
+            Assert.Equal("FI", interchange.Groups[0].Heading.SponsorName.IdentificationCodeQualifier);
+            Assert.Equal("38 6028429", interchange.Groups[0].Heading.SponsorName.IdentificationCode);
         }
 
         [Fact]

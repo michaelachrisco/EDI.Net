@@ -239,6 +239,21 @@ namespace indice.Edi.Tests.Models
 
             [EdiValue("X(9)", Path = "INS/16", Description = "INS17 - Number", Mandatory = false)]
             public string Number { get; set; }
+
+            public List<REF> MemberReferences { get; set; }//This is not working. Take a look when given chance.
+        }
+
+        [EdiSegment, EdiPath("REF")]
+        public class REF
+        {
+            [EdiValue("X(3)", Path = "REF/0", Description = "REF01 - Reference Identification Qualifier")]
+            public string ReferenceIdentificationQualifier { get; set; }
+
+            [EdiValue("X(50)", Path = "REF/1", Description = "REF02 - Reference Identification")]
+            public string ReferenceIdentification { get; set; }
+
+            [EdiValue("X(35)", Path = "REF/2", Description = "REF03 - Date Time Period")]
+            public string DateTimePeriod { get; set; }
         }
     }
 }

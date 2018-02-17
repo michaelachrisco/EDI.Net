@@ -434,6 +434,7 @@ namespace indice.Edi.Tests
             Assert.Equal("FT",interchange.Groups[0].Heading.MemberDetails[0].EmploymentStatusCode);
             Assert.Null(interchange.Groups[0].Heading.MemberDetails[0].StudentStatusCode);
             Assert.Equal("N", interchange.Groups[0].Heading.MemberDetails[0].HandicapIndicator);
+            Assert.Equal("0F", interchange.Groups[0].Heading.MemberDetails[0].MemberReferences[0].ReferenceIdentificationQualifier);
             //TODO: Test optional INS segments
 
 

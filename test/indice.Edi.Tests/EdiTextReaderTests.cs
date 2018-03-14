@@ -789,5 +789,23 @@ namespace indice.Edi.Tests
             Assert.Equal("Z07", interchange.Message.IMD_Other.FieldC);
         }
 
+        [Fact]
+        [Trait(Traits.Tag, "X12")]
+        public void X12_999_Test() {
+            var grammar = EdiGrammar.NewX12();
+            var interchange = default(Models.Implementation_Acknowledgment_999);
+            using (var stream = Helpers.GetResourceStream("x12.999.edi")) {
+                interchange = new EdiSerializer().Deserialize < Models.Implementation_Acknowledgment_999>(new StreamReader(stream), grammar);
+            }
+            Assert.Equal("01", interchange.AuthorizationInformationQualifier);
+            Assert.Equal("0000000000", interchange.AuthorizationInformation);
+            Assert.Equal("01", interchange.SecurityInformationQualifier);
+            Assert.Equal("0000000000", interchange.SecurityInformation);
+            Assert.Equal("ZZ", interchange.InterchangeIDQualifier);
+            Assert.Equal("ABCDEFGHIJKLMNO", interchange.InterchangeSenderID);
+            Assert.Equal("ZZ", interchange.InterchangeIDQualifier2);
+            Assert.Equal("123456789012345", interchange.InterchangeIDQualifier2);
+        }
+
     }
 }

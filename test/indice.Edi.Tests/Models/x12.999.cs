@@ -16,19 +16,19 @@ namespace indice.Edi.Tests.Models
         public string AuthorizationInformation { get; set; }
 
         [EdiValue("X(2)", Path = "ISA/2", Description = "ISA03 - Security Information Qualifier")]
-        public string Security_Information_Qualifier { get; set; }
+        public string SecurityInformationQualifier { get; set; }
 
         [EdiValue("X(10)", Path = "ISA/3", Description = "ISA04 - Security Information")]
-        public string Security_Information { get; set; }
+        public string SecurityInformation { get; set; }
 
         [EdiValue("X(2)", Path = "ISA/4", Description = "ISA05 - Interchange ID Qualifier")]
-        public string ID_Qualifier { get; set; }
+        public string InterchangeIDQualifier { get; set; }
 
         [EdiValue("X(15)", Path = "ISA/5", Description = "ISA06 - Interchange Sender ID")]
-        public string Sender_ID { get; set; }
+        public string InterchangeSenderID { get; set; }
 
-        [EdiValue("X(2)", Path = "ISA/6", Description = "ISA07 - Interchange ID Qualifier")]
-        public string ID_Qualifier2 { get; set; }
+        [EdiValue("X(2)", Path = "ISA/6", Description = "ISA07 - Interchange ID Qualifier 2")]
+        public string InterchangeIDQualifier2 { get; set; }
 
         [EdiValue("X(15)", Path = "ISA/7", Description = "ISA08 - Interchange Receiver ID")]
         public string Receiver_ID { get; set; }
@@ -64,5 +64,14 @@ namespace indice.Edi.Tests.Models
         public string TrailerControlNumber { get; set; }
 
         #endregion
+
+
+        public List<FunctionalGroup> Groups { get; set; }
+
+
+        [EdiGroup]
+        public class FunctionalGroup
+        {
+        }
     }
 }

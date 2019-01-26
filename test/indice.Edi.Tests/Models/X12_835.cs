@@ -117,9 +117,55 @@ namespace indice.Edi.Tests.Models
 
             [EdiValue("X(35)", Path = "ST/2", Description = "ST03 - Transaction set control number")]
             public string ImplementationConventionReference { get; set; }
+
             //BPR: Financial Information
             [EdiValue("X(2)", Path = "BPR/0", Description = "BPR01 - Transaction Handling Code")]
             public string TransactionHandlingCode { get; set; }
+
+            [EdiValue("X(18)", Path = "BPR/1", Description = "BPR02 - Monetary Amount")]
+            public string MonetaryAmount { get; set; }
+
+            [EdiValue("X(1)", Path = "BPR/2", Description = "BPR03 - Credit/Debit Flag")]
+            public char? CreditDebitFlag { get; set; }
+
+            [EdiValue("X(3)", Path = "BPR/3", Description = "BPR04 - Payment Method Code")]
+            public string PaymentMethodCode { get; set; }
+
+            [EdiValue("X(10)", Path = "BPR/4", Description = "BPR05 - Payment Format Code")]
+            public string PaymentFormatCode { get; set; }
+
+            [EdiValue("X(2)", Path = "BPR/5", Description = "BPR06 - (DFI) ID Number Qualifier")]
+            public string IDNumberQualifier { get; set; }
+
+            [EdiValue("X(12)", Path = "BPR/6", Description = "BPR07 - (DFI) Identification Number")]
+            public string IdentificationNumber { get; set; }
+
+            [EdiValue("X(3)", Path = "BPR/7", Description = "BPR08 - Account Number Qualifier")]
+            public string AccountNumberQualifier { get; set; }
+
+            [EdiValue("X(35)", Path = "BPR/8", Description = "BPR09 - Sender Bank Account Number")]
+            public string SenderBankAccountNumber { get; set; }
+
+            [EdiValue("X(10)", Path = "BPR/9", Description = "BPR10 - Originating Company Identifier")]
+            public string OriginatingCompanyIdentifier { get; set; }
+
+            [EdiValue("X(9)", Path = "BPR/10", Description = "BPR11 - Originating Company Supplemental Code")]
+            public string OriginatingCompanySupplementalCode { get; set; }
+
+            [EdiValue("X(2)", Path = "BPR/11", Description = "BPR12 - DFI Identification Number Qualifier")]
+            public string DFIIdentificationNumberQualifier { get; set; }
+
+            [EdiValue("X(12)", Path = "BPR/12", Description = "BPR13 - Receiver or Provider Bank ID Number")]
+            public string ReceiverOrProviderBankIDNumber { get; set; }
+
+            [EdiValue("X(3)", Path = "BPR/13", Description = "BPR14 - Account Number Qualifier")]
+            public string ReceiverOrProviderAccountNumberQualifier { get; set; }
+
+            [EdiValue("X(35)", Path = "BPR/14", Description = "BPR15 - Receiver or Provider Account Number")]
+            public string ReceiverOrProviderAccountNumber { get; set; }
+
+            [EdiValue("9(8)", Path = "BPR/15", Description = "BPR16 - Check Issue or EFT Effective Date")]
+            public DateTime CheckIssuanceDate { get; set; }
 
             //TODO: Separate out 834 and 835 specific basic segments.
             //They share about 70% of the base objects, but may need to separate out each.
